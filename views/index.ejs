@@ -15,9 +15,23 @@
   </ol>
   
   <h3>Usage: Please Upload a File ...</h3>
-  <form action="./metadata" method="post">
+
+  
+  <form action="./metadata" method="post" enctype="multipart/form-data">
+    <% if (typeof msg !== 'undefined') { %> 
+      <p><%= msg %></p> 
+    <% } %>
     <input type="file" name="upfile">
     <input type="submit" value="Upload">
   </form>
+
+  <% if (typeof data !== 'undefined') { %>
+    <ul>
+      <li>filename: <%= data.name %></li>
+      <li>mimetype: <%= data.type %></li>
+      <li>filesize: <%= data.size %></li>
+    </ul>   
+  <% } %>
+
 </body>
 </html>
