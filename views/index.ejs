@@ -5,33 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>File Metadata Api</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <ol>
-    <li>I can submit a form object that includes a file upload. The from file</li>
-    <li>input field has the "name" attribute set to "upfile". We rely on this in testing.</li>
-    <li>When I submit something, I will receive the file name, and size in bytes within the JSON response.</li>
-  </ol>
   
-  <h3>Usage: Please Upload a File ...</h3>
+  <h1>File Metadata Api</h1>
 
+  <div class="container">
+    <ol>
+      <li>Upload a file via the form provided</li>
+      <li>The backend will process the file and return the meta data</li>
+    </ol>
+    
+    <h3>Please Upload a File ...</h3>
   
-  <form action="./metadata" method="post" enctype="multipart/form-data">
-    <% if (typeof msg !== 'undefined') { %> 
-      <p><%= msg %></p> 
-    <% } %>
-    <input type="file" name="upfile">
-    <input type="submit" value="Upload">
-  </form>
-
-  <% if (typeof data !== 'undefined') { %>
+    <form action="./metadata" method="post" enctype="multipart/form-data">
+      <input type="file" name="upfile">
+      <input type="submit" value="Upload">
+    </form>
+  
     <ul>
-      <li>filename: <%= data.name %></li>
-      <li>mimetype: <%= data.type %></li>
-      <li>filesize: <%= data.size %></li>
-    </ul>   
-  <% } %>
+      <% if (typeof msg !== 'undefined') { %>
+        <li class="msg<%= typeof data === 'undefined' ? '-danger' : '' %>">status: <%= msg %></li>
+      <% } %> 
+    
+      <% if (typeof data !== 'undefined') { %>    
+        <li>name: <%= data.name %></li>
+        <li>type: <%= data.type %></li>
+        <li>size: <%= data.size %></li>
+      <% } %>
+    </ul>
+  </div>
+
+  <footer>
+    <p>coded by
+      <a href="http://www.charlietaylorcoder.com/">charlie taylor</a>
+    </p>
+  </footer>
 
 </body>
 </html>

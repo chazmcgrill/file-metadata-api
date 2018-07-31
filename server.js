@@ -30,14 +30,18 @@ app.get('/', (req, res) => {
 app.post('/metadata', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
-      res.json({error: "error uploading file"})
+      res.render('index', {msg: "error uploading file"})
     } else {
-      const data = { 
-        name: req.file.originalname, 
-        type: req.file.mimetype, 
-        size: req.file.size 
-      };
-      res.render('index', { msg: "file uploaded", data });
+      if (req.file === undefined) {
+        res.render('index', {msg: "error no file selected"})
+      } else {
+        const data = { 
+          name: req.file.originalname, 
+          type: req.file.mimetype, 
+          size: req.file.size 
+        };
+        res.render('index', { msg: "file uploaded", data });
+      }
     }
   })
 });
